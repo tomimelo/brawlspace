@@ -1,9 +1,13 @@
-import { Text } from '@chakra-ui/react'
+import { Button, Center, Input, Text } from '@chakra-ui/react'
 
 export const BrawlApp = () => {
   return (
     <>
-        <Text fontSize='5xl'>(5xl) In love with React & Next</Text><Text fontSize='5xl'>(5xl) In love with React & Next</Text>
+      <Center bg='tomato' h='100px' color='white' >
+        <Text fontSize='5xl'>BrawlApp</Text>
+        <Input placeholder='large size' size='lg' />
+        <Button>Search</Button>
+      </Center>
     </>
   )
 }
