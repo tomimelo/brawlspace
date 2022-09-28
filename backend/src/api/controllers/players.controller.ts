@@ -2,11 +2,11 @@ import { Request, Response } from 'express'
 import { BaseController } from '../../lib/base-controller/base-controller'
 
 export class PlayersController extends BaseController {
-  public constructor() {
+  public constructor () {
     super()
   }
 
-  public searchPlayer(req: Request, res: Response) {
+  public searchPlayer (req: Request, res: Response): void {
     const { steamId } = req.query
     res.json({
       ok: true,
@@ -14,8 +14,7 @@ export class PlayersController extends BaseController {
     })
   }
 
-  public handleError(error: any) {
+  public handleError (error: any): void {
     console.log(error)
   }
-
 }
