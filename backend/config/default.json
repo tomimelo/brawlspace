@@ -1,0 +1,22 @@
+{
+    "env": "development",
+    "api": {
+        "port": 3000
+    },
+    "db": {
+        "host": "your-db-host",
+        "port": 1000,
+        "user": "your-db-user",
+        "password": "your-db-password",
+        "options": "your-db-options"
+    },
+    "brawlhalla": {
+        "apiKey": "your-brawlhalla-api-key"
+    },
+    "steam": {
+        "apiKey": "your-steam-api-key"
+    },
+    "logger": {
+        "level": "debug"
+    }
+}

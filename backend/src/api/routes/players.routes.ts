@@ -11,6 +11,6 @@ export const playersRoutes = new MadRouter({
       method: MadRouteMethod.GET,
       path: '/search',
       handler: playersController.searchPlayer
-    },
+    }
   ]
 })
