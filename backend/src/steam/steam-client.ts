@@ -56,7 +56,9 @@ export class SteamClient {
     const matches = [...html.matchAll(playerRegex)]
     return await Promise.all(matches.map(async ([match, url, nickname]) => {
       const [maybeId, typeOfUrl] = url.split('/').reverse()
-      const id = typeOfUrl === 'profiles' ? maybeId : await this.getSteamId(maybeId)
+      const id = typeOfUrl === 'profiles'
+        ? maybeId
+        : await this.getSteamId(maybeId)
       return {
         id,
         url,
