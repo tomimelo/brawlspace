@@ -3,7 +3,7 @@ import { SteamUser } from '../../steam/steam-user'
 import { HtmlParser } from './html-parser'
 import { player1RawData, player2RawData, player3RawData } from '../../../test/mocks/html-parser/raw-data'
 
-describe.only(HtmlParser.name, () => {
+describe(HtmlParser.name, () => {
   const htmlParser = new HtmlParser()
   describe('parseUsers', () => {
     const html = player1RawData + player2RawData + player3RawData
