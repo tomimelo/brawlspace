@@ -20,6 +20,15 @@ export class PlayersController extends BaseController {
     })
   }
 
+  public async getPlayer (req: Request, res: Response): Promise<void> {
+    const { steamId } = req.params
+    const player = await this.playersService.getPlayer(steamId)
+    res.json({
+      ok: true,
+      player
+    })
+  }
+
   public handleError (error: any): void {
     console.log(error)
   }
