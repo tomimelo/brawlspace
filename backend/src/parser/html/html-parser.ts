@@ -1,14 +1,11 @@
+import { ValidationError } from 'mad-error'
 import { SteamUser } from '../../steam/steam-user'
 import { Parser } from '../parser'
 
 export class HtmlParser implements Parser<string> {
   public parseUsers (data: string): ReadonlyArray<SteamUser> {
     const normalizedHtml = data.replace(/\r|\n|\t/g, '')
-    const searchRowRegex = /<div class="search_row"(?:(?!search_row).)*<\/div>/g
-    const searchRows = normalizedHtml.match(searchRowRegex)
-    if (!searchRows) {
-      throw new Error('Something went wrong')
-    }
+    const searchRows = this.getUsersRawDataRows(normalizedHtml)
     return searchRows.map(searchRow => {
       const avatarRegex = /<div class="avatarMedium"><a href="([^<]+)"><img src="([^<]+)"><\/a><\/div>/
       const personaInfoRegex = /<div class="searchPersonaInfo"><a class="searchPersonaName" href="[^<]+">([^<]+)<\/a><br \/>(?:(.*)<br \/>)?(?:(.*)&nbsp;)?(?:<img.*src="([^<"]+)")?(?:(?!\/div).)*<\/div>/
@@ -27,5 +24,14 @@ export class HtmlParser implements Parser<string> {
         })
       }
     })
+  }
+
+  private getUsersRawDataRows (html: string): ReadonlyArray<string> {
+    const searchRowRegex = /<div class="search_row"(?:(?!search_row).)*<\/div>/g
+    const searchRows = html.match(searchRowRegex)
+    if (!searchRows) {
+      throw new ValidationError('No matches found in provided HTML')
+    }
+    return searchRows
   }
 }
