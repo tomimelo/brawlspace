@@ -1,15 +1,15 @@
 import { ValidationError } from 'mad-error'
-import { AvatarInfo, SteamUser, UserInfo } from '../../steam/steam-user'
+import { AvatarInfo, PersonaInfo, User } from '../../types/user'
 import { Parser } from '../parser'
 
 export class HtmlParser implements Parser<string> {
-  public parseUsers (data: string): ReadonlyArray<SteamUser> {
+  public parseUsers (data: string): ReadonlyArray<User> {
     const normalizedHtml = data.replace(/\r|\n|\t/g, '')
     const searchRows = this.getUsersRawDataRows(normalizedHtml)
     return searchRows.map(searchRow => this.parseUser(searchRow))
   }
 
-  private parseUser (html: string): SteamUser {
+  private parseUser (html: string): User {
     const { url, image } = this.parseAvatarInfo(html)
     const { alias, name, location } = this.parseUserInfo(html)
     return {
@@ -32,7 +32,7 @@ export class HtmlParser implements Parser<string> {
     }
   }
 
-  private parseUserInfo (html: string): UserInfo {
+  private parseUserInfo (html: string): PersonaInfo {
     const userInfoRegex = /<div class="searchPersonaInfo"><a class="searchPersonaName" href="[^<]+">([^<]+)<\/a><br \/>(?:(.*)<br \/>)?(?:(.*)&nbsp;)?(?:<img.*src="([^<"]+)")?(?:(?!\/div).)*<\/div>/
     const userInfoMatch = html.match(userInfoRegex)
     if (!userInfoMatch) this.throwNoMatchFoundError()

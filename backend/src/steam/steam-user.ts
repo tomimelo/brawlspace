@@ -1,15 +1,5 @@
-export interface AvatarInfo {
-  url: string,
-  image: string
-}
+import { User } from '../types/user'
 
-export interface UserInfo {
-  alias: string,
-  name?: string,
-  location?: {
-    description: string,
-    image: string
-  }
+export interface SteamUser extends User {
+  id: string
 }
-
-export type SteamUser = AvatarInfo & UserInfo

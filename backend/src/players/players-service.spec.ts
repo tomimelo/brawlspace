@@ -7,6 +7,7 @@ describe(PlayersService.name, () => {
   let playersService: PlayersService
   let steamClient: SteamClient
   const player1 = {
+    id: '1',
     url: 'https://myprofile.com/profile-id',
     alias: 'Player 1',
     image: 'https://myprofile.com/my-image.jpg',
@@ -17,6 +18,7 @@ describe(PlayersService.name, () => {
     }
   }
   const player2 = {
+    id: '2',
     url: 'https://myprofile.com/profile-id',
     alias: 'Player 2',
     image: 'https://myprofile.com/my-image.jpg',
@@ -26,6 +28,7 @@ describe(PlayersService.name, () => {
     }
   }
   const player3 = {
+    id: '3',
     url: 'https://myprofile.com/profile-id',
     alias: 'Player 3',
     image: 'https://myprofile.com/my-image.jpg',
