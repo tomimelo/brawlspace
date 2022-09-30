@@ -4,7 +4,7 @@ import { SteamUser } from '../../src/steam/steam-user'
 
 export class MockSteamClient extends SteamClient {
   public constructor (private mockUsers: ReadonlyArray<SteamUser>) {
-    super()
+    super({ apiKey: '' })
   }
 
   public async searchPlayers (q: string): Promise<SearchResults<ReadonlyArray<SteamUser>>> {

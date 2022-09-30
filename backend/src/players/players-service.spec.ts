@@ -7,14 +7,17 @@ describe(PlayersService.name, () => {
   let playersService: PlayersService
   let steamClient: SteamClient
   const player1 = {
+    id: '1',
     nickname: 'some-player-1',
     url: 'http://player-profile.com'
   }
   const player2 = {
+    id: '2',
     nickname: 'some-player-2',
     url: 'http://player-profile.com'
   }
   const player3 = {
+    id: '3',
     nickname: 'some-player-3',
     url: 'http://player-profile.com'
   }
