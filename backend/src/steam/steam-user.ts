@@ -1,5 +1,10 @@
 export interface SteamUser {
-  id: string,
-  nickname: string,
-  url: string
+  url: string;
+  name?: string;
+  alias: string;
+  image: string;
+  location?: {
+    description: string;
+    image: string;
+  }
 }

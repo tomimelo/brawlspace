@@ -7,19 +7,29 @@ describe(PlayersService.name, () => {
   let playersService: PlayersService
   let steamClient: SteamClient
   const player1 = {
-    id: '1',
-    nickname: 'some-player-1',
-    url: 'http://player-profile.com'
+    url: 'https://myprofile.com/profile-id',
+    alias: 'Player 1',
+    image: 'https://myprofile.com/my-image.jpg',
+    name: 'PlayerName',
+    location: {
+      description: 'Argentina',
+      image: 'https://myprofile.com/countryflags/ar.gif'
+    }
   }
   const player2 = {
-    id: '2',
-    nickname: 'some-player-2',
-    url: 'http://player-profile.com'
+    url: 'https://myprofile.com/profile-id',
+    alias: 'Player 2',
+    image: 'https://myprofile.com/my-image.jpg',
+    location: {
+      description: 'Spain',
+      image: 'https://myprofile.com/countryflags/es.gif'
+    }
   }
   const player3 = {
-    id: '3',
-    nickname: 'some-player-3',
-    url: 'http://player-profile.com'
+    url: 'https://myprofile.com/profile-id',
+    alias: 'Player 3',
+    image: 'https://myprofile.com/my-image.jpg',
+    name: 'PlayerName'
   }
   describe('searchPlayers', () => {
     beforeEach(() => {

@@ -54,7 +54,7 @@ export class SteamClient {
   private async parseUsersFromHTML (html: string): Promise<ReadonlyArray<SteamUser>> {
     const playerRegex = /<a class="searchPersonaName" href="([^>]*)">([^>]+)<\/a>/gm
     const matches = [...html.matchAll(playerRegex)]
-    return await Promise.all(matches.map(async ([match, url, nickname]) => {
+    return await Promise.all(matches.map(async ([match, url, alias]) => {
       const [maybeId, typeOfUrl] = url.split('/').reverse()
       const id = typeOfUrl === 'profiles'
         ? maybeId
@@ -62,7 +62,8 @@ export class SteamClient {
       return {
         id,
         url,
-        nickname
+        alias,
+        image: ''
       }
     }))
   }

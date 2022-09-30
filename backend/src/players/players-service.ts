@@ -11,9 +11,8 @@ export interface SearchResults<T> {
 }
 
 export interface Player {
-  id: string,
   url: string,
-  nickname: string
+  alias: string
 }
 
 export class PlayersService {
