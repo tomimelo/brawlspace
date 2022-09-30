@@ -51,8 +51,16 @@ export class HtmlParser implements Parser<string> {
 
   private getUsersRawDataRows (html: string): ReadonlyArray<string> {
     const searchRowRegex = /<div class="search_row"(?:(?!search_row).)*<\/div>/g
-    const searchRows = html.match(searchRowRegex) || []
-    return searchRows
+    const searchRows = html.match(searchRowRegex)
+    if (!searchRows) this.checkEmptyResults(html)
+    return searchRows || []
+  }
+
+  private checkEmptyResults (html: string): void {
+    const noResultsRegex = /<div class="search_results_error"/
+    if (!noResultsRegex.test(html)) {
+      this.throwNoMatchFoundError()
+    }
   }
 
   private throwNoMatchFoundError (): never {
