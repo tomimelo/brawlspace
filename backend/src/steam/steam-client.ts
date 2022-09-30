@@ -2,8 +2,15 @@ import { SteamUser } from './steam-user'
 import axios from 'axios'
 import { SearchOptions, SearchResults } from '../players/players-service'
 
+export interface SteamClientConfig {
+  apiKey: string
+}
+
 export class SteamClient {
-  public constructor () {}
+  private apiClient: any
+  public constructor (private readonly config: SteamClientConfig) {
+    this.apiClient = axios.create({ baseURL: 'http://api.steampowered.com', params: { key: this.config.apiKey } })
+  }
 
   public async searchPlayers (q: string, options: SearchOptions): Promise<SearchResults<ReadonlyArray<SteamUser>>> {
     const cookie = await this.getCookie()
@@ -16,12 +23,20 @@ export class SteamClient {
       }
     })
     const { html, search_result_count: total } = data
-    const players = this.parseUsersFromHTML(html)
+    const players = await this.parseUsersFromHTML(html)
     return {
       total,
       page,
       results: players
     }
+  }
+
+  public async getSteamId (nickname: string): Promise<string> {
+    const { data } = await this.apiClient.get(`/ISteamUser/ResolveVanityURL/v0001/?vanityurl=${nickname}`)
+    if (data.response.success !== 1) {
+      throw new Error('User not found')
+    }
+    return data.response.steamid
   }
 
   private async getCookie (): Promise<string | undefined> {
@@ -36,14 +51,17 @@ export class SteamClient {
     return sessionId
   }
 
-  private parseUsersFromHTML (html: string): ReadonlyArray<SteamUser> {
+  private async parseUsersFromHTML (html: string): Promise<ReadonlyArray<SteamUser>> {
     const playerRegex = /<a class="searchPersonaName" href="([^>]*)">([^>]+)<\/a>/gm
     const matches = [...html.matchAll(playerRegex)]
-    return matches.map(([match, url, nickname]) => {
+    return await Promise.all(matches.map(async ([match, url, nickname]) => {
+      const [maybeId, typeOfUrl] = url.split('/').reverse()
+      const id = typeOfUrl === 'profiles' ? maybeId : await this.getSteamId(maybeId)
       return {
+        id,
         url,
         nickname
       }
-    })
+    }))
   }
 }
