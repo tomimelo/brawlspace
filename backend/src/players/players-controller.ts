@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { BaseController } from '../../lib/base-controller/base-controller'
-import { PlayersService } from '../../players/players-service'
+import { BaseController } from '../lib/base-controller/base-controller'
+import { PlayersService } from './players-service'
 
 export class PlayersController extends BaseController {
   public constructor (private readonly playersService: PlayersService) {
