@@ -1,22 +1,22 @@
 export interface AppConfig {
-  env: string;
+  env: string
   api: {
-    port: number;
-  };
+    port: number
+  }
   db: {
-    host: string;
-    port: number;
-    user: string;
-    password: string;
-    options: any;
-  };
+    host: string
+    port: number
+    user: string
+    password: string
+    options: any
+  }
   brawlhalla: {
     apiKey: string
-  };
+  }
   steam: {
     apiKey: string
-  };
+  }
   logger: {
-    level: string;
-  };
+    level: string
+  }
 }

@@ -22,12 +22,12 @@ export const playersRoutes = new MadRouter({
     {
       method: MadRouteMethod.GET,
       path: '/search',
-      handler: playersController.searchPlayers
+      handler: playersController.searchPlayers,
     },
     {
       method: MadRouteMethod.GET,
       path: '/:steamId',
-      handler: playersController.getPlayer
-    }
-  ]
+      handler: playersController.getPlayer,
+    },
+  ],
 })

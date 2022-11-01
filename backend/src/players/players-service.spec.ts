@@ -7,7 +7,7 @@ import { BrawlhallaClient } from '../brawlhalla/brawlhalla-client'
 describe(PlayersService.name, () => {
   let playersService: PlayersService
   const steamExplorer = createStubInstance(SteamExplorer, {
-    findUsers: stub()
+    findUsers: stub(),
   })
 
   const player1 = {
@@ -18,8 +18,8 @@ describe(PlayersService.name, () => {
     name: 'PlayerName',
     location: {
       description: 'Argentina',
-      image: 'https://myprofile.com/countryflags/ar.gif'
-    }
+      image: 'https://myprofile.com/countryflags/ar.gif',
+    },
   }
   const player2 = {
     id: '2',
@@ -28,15 +28,15 @@ describe(PlayersService.name, () => {
     image: 'https://myprofile.com/my-image.jpg',
     location: {
       description: 'Spain',
-      image: 'https://myprofile.com/countryflags/es.gif'
-    }
+      image: 'https://myprofile.com/countryflags/es.gif',
+    },
   }
   const player3 = {
     id: '3',
     url: 'https://myprofile.com/profile-id',
     alias: 'Player 3',
     image: 'https://myprofile.com/my-image.jpg',
-    name: 'PlayerName'
+    name: 'PlayerName',
   }
 
   describe('searchPlayers', () => {
@@ -51,11 +51,11 @@ describe(PlayersService.name, () => {
     })
   })
 
-  function mockSteamExplorer (users: ReadonlyArray<SteamUser>): void {
+  function mockSteamExplorer(users: ReadonlyArray<SteamUser>): void {
     steamExplorer.findUsers.resolves({
       total: users.length,
       page: 1,
-      results: users
+      results: users,
     })
   }
 })

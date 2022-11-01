@@ -16,5 +16,5 @@ export const serverConfig: MadServerConfig = {
   router: apiRouter,
   routePrinter: (routes) => {
     console.log('Available endpoints ==>', { endpoints: routes })
-  }
+  },
 }
