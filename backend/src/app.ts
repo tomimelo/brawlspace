@@ -10,7 +10,7 @@ const logger = loggerAcquirer.acquire()
 
 const httpServer = new MadServer(serverConfig)
 
-async function startFunction (): Promise<void> {
+async function startFunction(): Promise<void> {
   logger.info(`Starting app with environment: ${environment}`)
   await httpServer.start()
 }

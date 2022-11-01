@@ -1,3 +1,3 @@
 export interface Runner {
-  run (func: Function): Promise<void>;
+  run(func: Function): Promise<void>
 }

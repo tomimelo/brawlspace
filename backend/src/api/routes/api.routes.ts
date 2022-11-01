@@ -4,7 +4,5 @@ import { playersRoutes } from './players.routes'
 export const apiRouter = new MadRouter({
   basePath: '/api',
   name: 'API',
-  handlers: [
-    playersRoutes
-  ]
+  handlers: [playersRoutes],
 })
