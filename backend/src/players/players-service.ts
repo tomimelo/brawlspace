@@ -1,6 +1,5 @@
+import { SteamExplorer, SteamUser } from 'steam-explorer'
 import { BrawlhallaClient } from '../brawlhalla/brawlhalla-client'
-import { SteamClient } from '../steam/steam-client'
-import { SteamUser } from '../steam/steam-user'
 
 export interface SearchOptions {
   page: number
@@ -8,19 +7,15 @@ export interface SearchOptions {
 
 export interface SearchResults<T> {
   total: number,
-  results: T,
+  results: ReadonlyArray<T>,
   page: number
 }
 
-interface Player {
-  alias: string
-}
-
 export class PlayersService {
-  public constructor (private readonly steamClient: SteamClient, private readonly brawlhallaClient: BrawlhallaClient) {}
+  public constructor (private readonly steamExplorer: SteamExplorer, private readonly brawlhallaClient: BrawlhallaClient) {}
 
-  public async searchPlayers (q: string, options: SearchOptions): Promise<SearchResults<ReadonlyArray<SteamUser>>> {
-    return this.steamClient.searchPlayers(q, options)
+  public async searchPlayers (q: string, options: SearchOptions): Promise<SearchResults<SteamUser>> {
+    return this.steamExplorer.findUsers(q, options)
   }
 
   public async getPlayer (steamId: string): Promise<any> {
