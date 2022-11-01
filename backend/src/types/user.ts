@@ -1,13 +1,13 @@
 export interface AvatarInfo {
-  url: string,
+  url: string
   image: string
 }
 
 export interface PersonaInfo {
-  alias: string,
-  name?: string,
+  alias: string
+  name?: string
   location?: {
-    description: string,
+    description: string
     image: string
   }
 }

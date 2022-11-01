@@ -12,9 +12,9 @@ const getAllProperties = (object: any): any => {
   return properties
 }
 
-export default function autoBind (self: any, { include, exclude }: any = {}) {
+export default function autoBind(self: any, { include, exclude }: any = {}) {
   const filter = (key: any) => {
-    const match = (pattern: any) => typeof pattern === 'string' ? key === pattern : pattern.test(key)
+    const match = (pattern: any) => (typeof pattern === 'string' ? key === pattern : pattern.test(key))
 
     if (include) {
       return include.some(match)

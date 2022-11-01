@@ -3,7 +3,7 @@ import path from 'path'
 
 class LoggerAcquirer {
   private logger: MadLogger
-  public constructor (config: any) {
+  public constructor(config: any) {
     const loggerManager = new MadLoggerManager()
     const consoleTransport = loggerManager.getConsoleTransport()
     const fileTransport = loggerManager.getFileTransport(config)
@@ -11,13 +11,13 @@ class LoggerAcquirer {
     this.logger = loggerManager.createLogger('Root')
   }
 
-  public acquire (): MadLogger {
+  public acquire(): MadLogger {
     return this.logger
   }
 }
 
 const defaultLoggerConfig = {
-  filename: path.join(__dirname, '../../../logs/brawlspace-%DATE%.log')
+  filename: path.join(__dirname, '../../../logs/brawlspace-%DATE%.log'),
 }
 
 export const loggerAcquirer = new LoggerAcquirer(defaultLoggerConfig)

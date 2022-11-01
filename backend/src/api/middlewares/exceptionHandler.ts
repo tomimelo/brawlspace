@@ -10,8 +10,8 @@ export default {
       ok: false,
       error: {
         status: 404,
-        message: `${req.baseUrl} not found`
-      }
+        message: `${req.baseUrl} not found`,
+      },
     })
   },
   internal: (error: any, req: Request, res: Response, next: NextFunction): void => {
@@ -23,8 +23,8 @@ export default {
         status: error.status || 500,
         message: error.message || 'Internal server error',
         code: error.code || -1,
-        data: error.data
-      }
+        data: error.data,
+      },
     })
-  }
+  },
 }
