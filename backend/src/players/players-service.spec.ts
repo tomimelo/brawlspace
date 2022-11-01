@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import { PlayersService } from './players-service'
 import { createStubInstance, stub } from 'sinon'
 import { SteamExplorer, SteamUser } from 'steam-explorer'
-import { BrawlhallaClient } from '../brawlhalla/brawlhalla-client'
+import BrawlhallaAPI from 'bhapi.js'
 
 describe(PlayersService.name, () => {
   let playersService: PlayersService
@@ -42,7 +42,7 @@ describe(PlayersService.name, () => {
   describe('searchPlayers', () => {
     beforeEach(() => {
       mockSteamExplorer([player1, player2, player3])
-      playersService = new PlayersService(steamExplorer, {} as BrawlhallaClient)
+      playersService = new PlayersService(steamExplorer, {} as BrawlhallaAPI)
     })
     it('should return a list of players', async () => {
       const { results } = await playersService.searchPlayers('some-player', { page: 1 })
