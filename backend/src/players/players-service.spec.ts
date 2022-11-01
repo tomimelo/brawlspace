@@ -1,11 +1,15 @@
 import { expect } from 'chai'
-import { MockSteamClient } from '../../test/mocks/mock-steam-client'
-import { SteamClient } from '../steam/steam-client'
 import { PlayersService } from './players-service'
+import { createStubInstance, stub } from 'sinon'
+import { SteamExplorer, SteamUser } from 'steam-explorer'
+import { BrawlhallaClient } from '../brawlhalla/brawlhalla-client'
 
 describe(PlayersService.name, () => {
   let playersService: PlayersService
-  let steamClient: SteamClient
+  const steamExplorer = createStubInstance(SteamExplorer, {
+    findUsers: stub()
+  })
+
   const player1 = {
     id: '1',
     url: 'https://myprofile.com/profile-id',
@@ -34,10 +38,11 @@ describe(PlayersService.name, () => {
     image: 'https://myprofile.com/my-image.jpg',
     name: 'PlayerName'
   }
+
   describe('searchPlayers', () => {
     beforeEach(() => {
-      steamClient = new MockSteamClient([player1, player2, player3])
-      playersService = new PlayersService(steamClient)
+      mockSteamExplorer([player1, player2, player3])
+      playersService = new PlayersService(steamExplorer, {} as BrawlhallaClient)
     })
     it('should return a list of players', async () => {
       const { results } = await playersService.searchPlayers('some-player', { page: 1 })
@@ -45,4 +50,12 @@ describe(PlayersService.name, () => {
       expect(results).to.deep.equal(expectedResult)
     })
   })
+
+  function mockSteamExplorer (users: ReadonlyArray<SteamUser>): void {
+    steamExplorer.findUsers.resolves({
+      total: users.length,
+      page: 1,
+      results: users
+    })
+  }
 })
