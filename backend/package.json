@@ -22,18 +22,22 @@
     "express-validator": "^6.14.2",
     "mad-error": "^1.1.0",
     "mad-logger": "^3.0.0",
-    "mad-server": "^3.2.5"
+    "mad-server": "^3.2.5",
+    "steam-explorer": "^0.1.5"
   },
   "devDependencies": {
     "@types/chai": "^4.3.3",
+    "@types/chai-as-promised": "^7.1.5",
     "@types/config": "0.0.39",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/mocha": "^10.0.0",
     "@types/node": "^16.6.1",
+    "@types/sinon-chai": "^3.2.8",
     "@typescript-eslint/eslint-plugin": "^5.30.3",
     "@typescript-eslint/parser": "^5.30.3",
     "chai": "^4.3.6",
+    "chai-as-promised": "^7.1.1",
     "eslint": "^8.18.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
@@ -41,6 +45,8 @@
     "eslint-plugin-n": "^15.2.3",
     "eslint-plugin-promise": "^6.0.0",
     "mocha": "^10.0.0",
+    "sinon": "^14.0.1",
+    "sinon-chai": "^3.7.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.8.4"
   }
