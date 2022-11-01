@@ -1,8 +1,9 @@
-import { Text } from '@chakra-ui/react';
 import React from 'react';
 
+import { AppRouter } from './router/AppRouter';
+
 const BrawlSpace: React.FC = () => {
-  return <Text fontSize="6xl">BrawlSpace</Text>;
+  return <AppRouter />;
 };
 
 export default BrawlSpace;
