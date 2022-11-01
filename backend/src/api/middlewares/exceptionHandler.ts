@@ -4,7 +4,7 @@ import { loggerAcquirer } from '../../utils/logger-acquirer/logger-acquirer'
 const logger = loggerAcquirer.acquire().child('ExceptionHandler')
 
 export default {
-  notFound: (req: Request, res: Response, next: NextFunction): void => {
+  notFound: (req: Request, res: Response, _next: NextFunction): void => {
     logger.error(`${req.baseUrl} not found`)
     res.status(404).json({
       ok: false,
@@ -14,7 +14,7 @@ export default {
       },
     })
   },
-  internal: (error: any, req: Request, res: Response, next: NextFunction): void => {
+  internal: (error: any, req: Request, res: Response, _next: NextFunction): void => {
     logger.error(`${error.message} - code: ${error.code} ${error.stack ? '\n' + error.stack : ''}`)
     res.status(error.status || 500)
     res.json({
