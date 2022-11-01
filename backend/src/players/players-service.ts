@@ -1,20 +1,10 @@
-import { SteamExplorer, SteamUser } from 'steam-explorer'
+import { SteamExplorer, SteamUser, FindOptions, FindResults } from 'steam-explorer'
 import { BrawlhallaClient } from '../brawlhalla/brawlhalla-client'
-
-export interface SearchOptions {
-  page: number
-}
-
-export interface SearchResults<T> {
-  total: number
-  results: ReadonlyArray<T>
-  page: number
-}
 
 export class PlayersService {
   public constructor(private readonly steamExplorer: SteamExplorer, private readonly brawlhallaClient: BrawlhallaClient) {}
 
-  public async searchPlayers(q: string, options: SearchOptions): Promise<SearchResults<SteamUser>> {
+  public async searchPlayers(q: string, options: FindOptions): Promise<FindResults<SteamUser>> {
     return this.steamExplorer.findUsers(q, options)
   }
 

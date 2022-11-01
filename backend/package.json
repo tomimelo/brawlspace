@@ -24,7 +24,7 @@
     "mad-error": "^1.1.0",
     "mad-logger": "^3.0.0",
     "mad-server": "^3.2.5",
-    "steam-explorer": "^0.1.5"
+    "steam-explorer": "^0.1.6"
   },
   "devDependencies": {
     "@types/chai": "^4.3.3",
