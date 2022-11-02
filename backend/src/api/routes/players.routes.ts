@@ -3,16 +3,16 @@ import config from 'config'
 import { PlayersService } from '../../players/players-service'
 import { PlayersController } from '../../players/players-controller'
 import { AppConfig } from '../../config'
-import { BrawlhallaClient } from '../../brawlhalla/brawlhalla-client'
 import { SteamExplorer } from 'steam-explorer'
+import BrawlhallaAPI from 'bhapi.js'
 
 const { apiKey: steamApiKey } = config.get<AppConfig['steam']>('steam')
 const steamExplorer = new SteamExplorer({ apiKey: steamApiKey })
 
-const brawlhallaClientConfig = config.get<AppConfig['brawlhalla']>('brawlhalla')
-const brawlhallaClient = new BrawlhallaClient(brawlhallaClientConfig)
+const { apiKey: brawlhallaApiKey } = config.get<AppConfig['brawlhalla']>('brawlhalla')
+const bhapi = new BrawlhallaAPI({ apiKey: brawlhallaApiKey })
 
-const playersService = new PlayersService(steamExplorer, brawlhallaClient)
+const playersService = new PlayersService(steamExplorer, bhapi)
 const playersController = new PlayersController(playersService)
 
 export const playersRoutes = new MadRouter({
