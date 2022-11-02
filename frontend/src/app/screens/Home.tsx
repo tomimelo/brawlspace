@@ -26,7 +26,7 @@ interface FormData {
 }
 
 const Home: React.FC = () => {
-  const { brawlhallaId, formState, onInputChange } = useForm<FormData>({ brawlhallaId: '' });
+  const { brawlhallaId, onInputChange } = useForm<FormData>({ brawlhallaId: '' });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -34,7 +34,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <Flex alignItems="center" bg="blue.800" flex={1} justifyContent="center">
+    <Flex alignItems="center" bg="blue.800" flex={1} justifyContent="center" maxHeight="100vh">
       <Container borderRadius={9} height="700px" p={8} width="600px">
         <Stack direction="column" spacing={6}>
           <Image src={logo} />
