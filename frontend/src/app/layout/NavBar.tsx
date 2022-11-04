@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Container, Image, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Container, Image, Stack } from '@chakra-ui/react';
 import { useLocation, Link } from 'wouter';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 
