@@ -28,23 +28,29 @@ const LegendCard: React.FC<Props> = ({ legend }) => {
             letterSpacing="wide"
             textTransform="uppercase"
           >
-            {legend.legend_name_key}
+            Favorite Legend
           </Text>
 
           <Image height="70px" src="https://bit.ly/dan-abramov" width="70px" />
         </Stack>
 
-        <Text display="block" fontSize="md" fontWeight="semibold" lineHeight="normal" my={1}>
+        <Text
+          display="block"
+          fontSize="lg"
+          fontWeight="semibold"
+          lineHeight="normal"
+          textTransform="uppercase"
+        >
+          {legend.legend_name_key}
+        </Text>
+        <Text display="block" fontSize="md" fontWeight="semibold" lineHeight="normal">
           Games: {legend.games}
         </Text>
 
-        <Stack alignItems="center" direction="row" spacing={6}>
-          <Text color="gray.500" my={2}>
-            Wins: {legend.wins}
-          </Text>
-          <Text color="gray.500" my={2}>
-            Level: {legend.level}
-          </Text>
+        <Stack alignItems="center" direction="row" spacing={3}>
+          <Text color="gray.500">Wins: {legend.wins}</Text>
+          <Text color="gray.500">Level: {legend.level}</Text>
+          <Text color="gray.500">KOs: {legend.kos}</Text>
         </Stack>
       </Stack>
     </Box>
