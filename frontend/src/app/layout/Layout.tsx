@@ -9,7 +9,7 @@ interface Props {
 
 const Layout: React.FC<Props> = ({ children }) => {
   return (
-    <Flex backgroundColor="gray.100" direction="column" flex={1}>
+    <Flex backgroundColor="#c7d5e0" direction="column" flex={1}>
       <NavBar />
 
       {children}
