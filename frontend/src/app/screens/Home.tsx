@@ -18,6 +18,7 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { InfoOutlineIcon } from '@chakra-ui/icons';
+import { useLocation } from 'wouter';
 
 import { useForm } from '@/app/hooks/useForm';
 import logo from '@/assets/logo.png';
@@ -27,23 +28,30 @@ interface FormData {
   brawlhallaId: string;
 }
 
+const formData = {
+  brawlhallaId: '',
+};
+
+const formValidations = {
+  brawlhallaId: [
+    (value: string) => value.length === 6 && !isNaN(Number(value)),
+    'Id must be 6 digit long.',
+  ],
+};
+
 const Home: React.FC = () => {
-  const { brawlhallaId, onInputChange } = useForm<FormData>({ brawlhallaId: '' });
+  const { brawlhallaId, brawlhallaIdValid, isFormValid, onInputChange } = useForm<FormData>(
+    formData,
+    formValidations,
+  );
   const [isFormSubmitted, setFormSubmitted] = useState<boolean>(false);
-
-  const isFormValid = (): boolean => {
-    if (brawlhallaId.length === 6 && !isNaN(Number(brawlhallaId))) {
-      return true;
-    }
-
-    return false;
-  };
+  const [location, setLocation] = useLocation();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     setFormSubmitted(true);
-    if (!isFormValid()) return;
-    console.log('hola');
+    if (!isFormValid) return;
+    setLocation(`/search?q=${brawlhallaId}`);
   };
 
   return (
@@ -52,13 +60,13 @@ const Home: React.FC = () => {
         <Stack direction="column" spacing={6}>
           <Image src={logo} />
           <form id="brawlIdForm" onSubmit={handleSubmit}>
-            <FormControl isInvalid={isFormSubmitted && !isFormValid() ? true : false}>
+            <FormControl isInvalid={isFormSubmitted && !isFormValid ? true : false}>
               <InputGroup size="md">
                 <Input
                   isRequired
                   bg="gray.100"
                   name="brawlhallaId"
-                  placeholder="Brawlhalla Id"
+                  placeholder="Insert your Brawlhalla Id"
                   pr="4.5rem"
                   value={brawlhallaId}
                   onChange={(ev) => onInputChange(ev)}
@@ -78,7 +86,7 @@ const Home: React.FC = () => {
                   </Popover>
                 </InputRightElement>
               </InputGroup>
-              <FormErrorMessage>Form must be 6 digit long.</FormErrorMessage>
+              <FormErrorMessage>{brawlhallaIdValid}</FormErrorMessage>
             </FormControl>
           </form>
           <Button form="brawlIdForm" type="submit">
