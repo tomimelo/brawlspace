@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Container,
   Flex,
+  FormControl,
+  FormErrorMessage,
   Image,
   Input,
   InputGroup,
@@ -27,10 +29,21 @@ interface FormData {
 
 const Home: React.FC = () => {
   const { brawlhallaId, onInputChange } = useForm<FormData>({ brawlhallaId: '' });
+  const [isFormSubmitted, setFormSubmitted] = useState<boolean>(false);
+
+  const isFormValid = (): boolean => {
+    if (brawlhallaId.length === 6 && !isNaN(Number(brawlhallaId))) {
+      return true;
+    }
+
+    return false;
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    console.log(brawlhallaId);
+    setFormSubmitted(true);
+    if (!isFormValid()) return;
+    console.log('hola');
   };
 
   return (
@@ -39,30 +52,34 @@ const Home: React.FC = () => {
         <Stack direction="column" spacing={6}>
           <Image src={logo} />
           <form id="brawlIdForm" onSubmit={handleSubmit}>
-            <InputGroup size="md">
-              <Input
-                bg="gray.100"
-                name="brawlhallaId"
-                placeholder="Brawlhalla Id"
-                pr="4.5rem"
-                value={brawlhallaId}
-                onChange={(ev) => onInputChange(ev)}
-              />
-              <InputRightElement width="4.5rem">
-                <Popover trigger="hover">
-                  <PopoverTrigger>
-                    <InfoOutlineIcon cursor="pointer" />
-                  </PopoverTrigger>
-                  <PopoverContent bg="black" borderColor="blue.800" color="white">
-                    <PopoverArrow bg="black" />
-                    <PopoverHeader>Find your Brawlhalla Id in your inventory!</PopoverHeader>
-                    <PopoverBody>
-                      <Image src={findId} />
-                    </PopoverBody>
-                  </PopoverContent>
-                </Popover>
-              </InputRightElement>
-            </InputGroup>
+            <FormControl isInvalid={isFormSubmitted && !isFormValid() ? true : false}>
+              <InputGroup size="md">
+                <Input
+                  isRequired
+                  bg="gray.100"
+                  name="brawlhallaId"
+                  placeholder="Brawlhalla Id"
+                  pr="4.5rem"
+                  value={brawlhallaId}
+                  onChange={(ev) => onInputChange(ev)}
+                />
+                <InputRightElement width="4.5rem">
+                  <Popover trigger="hover">
+                    <PopoverTrigger>
+                      <InfoOutlineIcon cursor="pointer" />
+                    </PopoverTrigger>
+                    <PopoverContent bg="black" borderColor="blue.800" color="white">
+                      <PopoverArrow bg="black" />
+                      <PopoverHeader>Find your Brawlhalla Id in your inventory!</PopoverHeader>
+                      <PopoverBody>
+                        <Image src={findId} />
+                      </PopoverBody>
+                    </PopoverContent>
+                  </Popover>
+                </InputRightElement>
+              </InputGroup>
+              <FormErrorMessage>Form must be 6 digit long.</FormErrorMessage>
+            </FormControl>
           </form>
           <Button form="brawlIdForm" type="submit">
             Search
