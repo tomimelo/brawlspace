@@ -34,8 +34,8 @@ const formData = {
 
 const formValidations = {
   brawlhallaId: [
-    (value: string) => value.length === 6 && !isNaN(Number(value)),
-    'Id must be 6 digit long.',
+    (value: string) => value.length === 7 && !isNaN(Number(value)),
+    'Id must be 7 digit long.',
   ],
 };
 
