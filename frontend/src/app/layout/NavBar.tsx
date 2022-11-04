@@ -1,10 +1,9 @@
 import React from 'react';
-import { Box, Container, Link, Stack, Text } from '@chakra-ui/react';
+import { Box, Container, Stack, Text } from '@chakra-ui/react';
+import { useLocation, Link } from 'wouter';
 
 export const NavBar: React.FC = () => {
-  const currentLocation = (): string => {
-    return window.location.hash.replace(/^#/, '') || '/';
-  };
+  const [location] = useLocation();
 
   return (
     <Box backgroundColor="white" boxShadow="md">
@@ -18,8 +17,15 @@ export const NavBar: React.FC = () => {
         >
           <Text fontSize="3xl">BrawlSpace</Text>
 
-          <Link href="/" visibility={currentLocation() === '/' ? 'hidden' : 'visible'}>
-            <Text fontSize="3xl">Go Back</Text>
+          <Link href="/">
+            <Text
+              _hover={{ textDecoration: 'underline' }}
+              cursor="pointer"
+              fontSize="3xl"
+              visibility={location === '/' ? 'hidden' : 'visible'}
+            >
+              Go Back
+            </Text>
           </Link>
         </Stack>
       </Container>
