@@ -2,17 +2,22 @@ import { Box, Stack, Text } from '@chakra-ui/react';
 
 import { PlayerRanked, PlayerStats } from '../types';
 
+import 'animate.css';
+import getTierColor from '@/helpers/';
+
 type Props = {
   player: PlayerRanked;
   playerStats: PlayerStats;
 };
 
 const PlayerCard: React.FC<Props> = ({ player, playerStats }) => {
+  const { name, tier, region, wins, rating, peak_rating } = player;
+
   return (
     <Box
-      bgColor="white"
       borderRadius="md"
       boxShadow="md"
+      className="card animate__animated animate__fadeInLeft"
       display={{ md: 'flex' }}
       margin={2}
       maxWidth="32rem"
@@ -26,35 +31,41 @@ const PlayerCard: React.FC<Props> = ({ player, playerStats }) => {
       >
         <Stack direction="row" justifyContent="space-between">
           <Text
-            color="teal.600"
+            color="teal.400"
             fontSize="lg"
             fontWeight="bold"
             letterSpacing="wide"
             textTransform="uppercase"
           >
-            {player.name}
+            {name}
           </Text>
 
-          <Text color="gray.500">Level: {playerStats?.level}</Text>
+          <Text color="gray.300">Level: {playerStats?.level}</Text>
         </Stack>
 
-        <Text display="block" fontSize="md" fontWeight="semibold" lineHeight="normal">
-          {player.tier}
+        <Text
+          color={getTierColor(tier)}
+          display="block"
+          fontSize="md"
+          fontWeight="semibold"
+          lineHeight="normal"
+        >
+          {tier}
         </Text>
 
         <Stack>
           <Stack alignItems="center" direction="row" justifyContent="space-between">
-            <Text display="block" fontSize="md" lineHeight="normal" my={1}>
-              Region: {player.region}
+            <Text color="whiteAlpha.700" display="block" fontSize="md" lineHeight="normal" my={1}>
+              Region: {region}
             </Text>
-            <Text display="block" fontSize="md" lineHeight="normal" my={1}>
-              Ranked Wins:{player.wins}
+            <Text color="whiteAlpha.700" display="block" fontSize="md" lineHeight="normal" my={1}>
+              Ranked Wins: {wins}
             </Text>
           </Stack>
 
           <Stack alignItems="center" direction="row" spacing={6}>
-            <Text color="gray.500">Rating: {player.rating}</Text>
-            <Text color="gray.500">Peak Rating: {player.peak_rating}</Text>
+            <Text color="whiteAlpha.700">Rating: {rating}</Text>
+            <Text color="whiteAlpha.700">Peak Rating: {peak_rating}</Text>
           </Stack>
         </Stack>
       </Stack>
