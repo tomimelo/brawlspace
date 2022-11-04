@@ -12,8 +12,10 @@ const Search: React.FC = () => {
   const [player, setPlayer] = useState<PlayerRanked>();
   const [playerStats, setPlayerStats] = useState<PlayerStats>();
 
+  const query: string = window.location.search.slice(3);
+
   useEffect(() => {
-    Promise.all([api.getRanked(), api.getStats()])
+    Promise.all([api.getRanked(query), api.getStats(query)])
       .then(([rankedResults, statsResults]) => {
         setPlayer(rankedResults);
         setPlayerStats(statsResults);
@@ -22,7 +24,7 @@ const Search: React.FC = () => {
       .catch(() => {
         setStatus('rejected');
       });
-  }, []);
+  }, [query]);
 
   const getFavoriteLegend = (playerStats: PlayerStats): LegendStats => {
     const favoriteLegend = playerStats.legends.reduce((prev, current): LegendStats => {
@@ -43,7 +45,7 @@ const Search: React.FC = () => {
           )}
           {status === 'rejected' && (
             <Flex alignItems="center" justifyContent="center" paddingY="12">
-              <Text>Hubo un error al cargar datos :(</Text>
+              <Text>There was an error loading data, does your id exists?</Text>
             </Flex>
           )}
           {player && playerStats && (

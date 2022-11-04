@@ -7,7 +7,7 @@ type Props = {
 
 const LegendsTable: React.FC<Props> = ({ legends }) => {
   return (
-    <Box bg="white" border="0.5px solid #D3D3D3" borderRadius="xl" padding={1}>
+    <Box bg="white" border="0.5px solid #D3D3D3" borderRadius="xl" mt={10} padding={1}>
       <TableContainer>
         <Table colorScheme="facebook" variant="simple">
           <Thead>

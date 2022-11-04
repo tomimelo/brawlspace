@@ -3,21 +3,22 @@ import { PlayerRanked, PlayerStats } from './types';
 const token = import.meta.env.VITE_BRAWLHALLA_TOKEN;
 
 export default {
-  getRanked: async (): Promise<PlayerRanked> => {
-    const res = await fetch(`https://api.brawlhalla.com/player/6086423/ranked?api_key=${token}`);
+  getRanked: async (id: string): Promise<PlayerRanked> => {
+    const res = await fetch(`https://api.brawlhalla.com/player/${id}/ranked?api_key=${token}`);
     const data = await res.json();
 
-    if (!res.ok) {
+    //Brawlhalla api does not check if ID does not exist, that's why we check if data is not empty.
+    if (!res.ok || Object.keys(data).length === 0) {
       throw new Error('no se pudo realizar el método de getRanked');
     }
 
     return data;
   },
-  getStats: async (): Promise<PlayerStats> => {
-    const res = await fetch(`https://api.brawlhalla.com/player/6086423/stats?api_key=${token}`);
+  getStats: async (id: string): Promise<PlayerStats> => {
+    const res = await fetch(`https://api.brawlhalla.com/player/${id}/stats?api_key=${token}`);
     const data = await res.json();
 
-    if (!res.ok) {
+    if (!res.ok || Object.keys(data).length === 0) {
       throw new Error('no se pudo realizar el método de getStats');
     }
 
