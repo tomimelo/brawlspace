@@ -7,7 +7,7 @@ type Props = { legend: LegendStats };
 
 const LegendCard: React.FC<Props> = ({ legend }) => {
   const { legend_name_key, wins, kos, level, games } = legend;
-  const legendImageUrl = `./src/assets/legends/${legend_name_key}.png`;
+  const legendImageUrl = `./legends/${legend_name_key}.png`;
 
   return (
     <Box

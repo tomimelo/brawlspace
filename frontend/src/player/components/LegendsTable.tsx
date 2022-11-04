@@ -29,7 +29,7 @@ const LegendsTable: React.FC<Props> = ({ legends }) => {
           <Tbody>
             {sortedLegends.map((legend) => {
               const { peak_rating, legend_name_key, games, rating, tier, legend_id } = legend;
-              const legendImageUrl = `./src/assets/legends/${legend_name_key}.png`;
+              const legendImageUrl = `./legends/${legend_name_key}.png`;
 
               return (
                 <Tr key={legend_id}>
