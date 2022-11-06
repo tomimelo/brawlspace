@@ -45,7 +45,7 @@ describe(PlayersService.name, () => {
       playersService = new PlayersService(steamExplorer, {} as BrawlhallaAPI)
     })
     it('should return a list of players', async () => {
-      const { results } = await playersService.searchPlayers('some-player', { page: 1 })
+      const { results } = await playersService.searchPlayer('some-player', { page: 1 })
       const expectedResult = [player1, player2, player3]
       expect(results).to.deep.equal(expectedResult)
     })
