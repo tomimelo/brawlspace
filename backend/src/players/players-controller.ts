@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
+import { NotFoundError } from 'mad-error'
 import { BaseController } from '../lib/base-controller/base-controller'
 import { PlayersService } from './players-service'
 
@@ -16,7 +17,8 @@ export class PlayersController extends BaseController {
         ok: true,
         player,
       })
-    } catch (error) {
+    } catch (err: any) {
+      const error = this.isNotFoundError(err) ? new NotFoundError('Player not found') : err
       this.handleError(error, next)
     }
   }
@@ -36,5 +38,9 @@ export class PlayersController extends BaseController {
 
   public handleError(error: any, next: NextFunction): void {
     next(error)
+  }
+
+  private isNotFoundError(error: any): boolean {
+    return error.message && typeof error.message === 'string' && error.message.toLowerCase().includes('not found')
   }
 }
