@@ -12,11 +12,15 @@ export class SteamUtils {
   }
 
   public static isCustomUrl(value: string): boolean {
-    return /^https?:\/\/steamcommunity\.com\/id\/(.+)$/.test(value)
+    return /^https?:\/\/steamcommunity\.com\/id\/(.+)\/?$/.test(value)
   }
 
   public static isProfileUrl(value: string): boolean {
-    return /^https?:\/\/steamcommunity\.com\/profiles\/(\d{17})$/.test(value)
+    return /^https?:\/\/steamcommunity\.com\/profiles\/(\d{17})\/?$/.test(value)
+  }
+
+  public static getMaybeIdFromUrl(url: string): string {
+    return url.replace(/\/$/, '').split('/').reverse()[0]
   }
 
   public static toSteamID64(value: string): string {
@@ -34,7 +38,8 @@ export class SteamUtils {
   }
 
   private static fromSteamID3(value: string): string {
-    const [, , w] = value.split(':')
+    const trimmedValue = value.replace(/\[|\]/g, '')
+    const [, , w] = trimmedValue.split(':')
     const W = Number(w)
     const accountType = W % 2
     return 'STEAM_0:' + accountType.toString() + ':' + Math.floor(W / 2).toString()
