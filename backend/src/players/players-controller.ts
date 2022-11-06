@@ -10,7 +10,7 @@ export class PlayersController extends BaseController {
   public async searchPlayer(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { q } = req.query
-      const player = this.playersService.searchPlayer(q as string)
+      const player = await this.playersService.searchPlayer(q as string)
 
       res.json({
         ok: true,
