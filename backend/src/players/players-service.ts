@@ -20,8 +20,9 @@ export class PlayersService {
     return this.bhapi.searchBySteamID(steamId64)
   }
 
-  public async getPlayer(steamId: string): Promise<Player> {
-    return this.bhapi.searchBySteamID(steamId)
+  public async getPlayer(brawlhallaId: number): Promise<Player> {
+    // Get player stats and ranked data
+    return this.bhapi.getPlayerStats(brawlhallaId)
   }
 
   private getSearchableValueType(value: string): SearcheableValueType {

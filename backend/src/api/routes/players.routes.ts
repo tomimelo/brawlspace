@@ -27,12 +27,12 @@ export const playersRoutes = new MadRouter({
       handler: playersController.searchPlayer,
       middlewares: [
         query('q').exists().withMessage('Query param "q" is required').isString().withMessage('Query param "q" should be a string'),
-        validateRequest
-      ]
+        validateRequest,
+      ],
     },
     {
       method: MadRouteMethod.GET,
-      path: '/:steamId',
+      path: '/:brawlhallaId',
       handler: playersController.getPlayer,
     },
   ],

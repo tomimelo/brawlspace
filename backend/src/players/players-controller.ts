@@ -25,8 +25,8 @@ export class PlayersController extends BaseController {
 
   public async getPlayer(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const { steamId } = req.params
-      const player = await this.playersService.getPlayer(steamId)
+      const { brawlhallaId } = req.params
+      const player = await this.playersService.getPlayer(Number(brawlhallaId))
       res.json({
         ok: true,
         player,
