@@ -45,6 +45,7 @@ const Home: React.FC = () => {
     formValidations,
   );
   const [isFormSubmitted, setFormSubmitted] = useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [location, setLocation] = useLocation();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -56,11 +57,12 @@ const Home: React.FC = () => {
 
   return (
     <Flex alignItems="center" bg="blue.800" flex={1} justifyContent="center" maxHeight="100vh">
-      <Container borderRadius={9} height="700px" p={8} width="600px">
+      <Container p={8}>
         <Stack direction="column" spacing={6}>
           <Image src={logo} />
+
           <form id="brawlIdForm" onSubmit={handleSubmit}>
-            <FormControl isInvalid={isFormSubmitted && !isFormValid ? true : false}>
+            <FormControl isInvalid={isFormSubmitted && !isFormValid ? true : false} mt={'2em'}>
               <InputGroup size="md">
                 <Input
                   isRequired
@@ -72,7 +74,7 @@ const Home: React.FC = () => {
                   onChange={(ev) => onInputChange(ev)}
                 />
                 <InputRightElement width="4.5rem">
-                  <Popover trigger="hover">
+                  <Popover strategy="fixed" trigger="hover">
                     <PopoverTrigger>
                       <InfoOutlineIcon cursor="pointer" />
                     </PopoverTrigger>
