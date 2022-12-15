@@ -5,6 +5,8 @@ import { PlayersController } from '../../players/players-controller'
 import { AppConfig } from '../../config'
 import { SteamExplorer } from 'steam-explorer'
 import BrawlhallaAPI from 'bhapi.js'
+import validateRequest from '../middlewares/validateRequest'
+import { query } from 'express-validator'
 
 const { apiKey: steamApiKey } = config.get<AppConfig['steam']>('steam')
 const steamExplorer = new SteamExplorer({ apiKey: steamApiKey })
@@ -22,11 +24,15 @@ export const playersRoutes = new MadRouter({
     {
       method: MadRouteMethod.GET,
       path: '/search',
-      handler: playersController.searchPlayers,
+      handler: playersController.searchPlayer,
+      middlewares: [
+        query('q').exists().withMessage('Query param "q" is required').isString().withMessage('Query param "q" should be a string'),
+        validateRequest,
+      ],
     },
     {
       method: MadRouteMethod.GET,
-      path: '/:steamId',
+      path: '/:brawlhallaId',
       handler: playersController.getPlayer,
     },
   ],
